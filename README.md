@@ -1,6 +1,4 @@
-# Black Hat Python
-Started as a cheatsheet. Will be a book one day. 
-
+# Black Hat Powershell
 ## Introduction
 
 **Powershell Locations**
@@ -36,6 +34,44 @@ sET-ItEM ( 'V'+'aR' + 'IA' + 'blE:1q2' + 'uZx' ) ( [TYpE]( "{1}{0}"-F'F','rE' ) 
 -  insecure files
 - Print Domain `systeminfo | findstr /B "Domain"`
 - Check Powershell version `$PSVersionTable. PSVersion`
+- List processes `Get-Process`
+
+## Zipping files and directories
+
+`Compress-Archive -Path C:\path\to\file\*.jpg -DestinationPath C:\path\to\archive.zip`
+
+## Encryption
+
+### Creating encryption key
+
+```
+$EncryptionKeyBytes = New-Object Byte[] 32
+[Security.Cryptography.RNGCryptoServiceProvider]::Create().GetBytes($EncryptionKeyBytes)
+$EncryptionKeyBytes | Out-File "./encryption.key"
+```
+
+### Encrypting file
+
+```
+$FileContent = Get-Content ".\file.txt"
+$EncryptionKeyData = Get-Content "./encryption.key"
+$secureString = ConvertTo-SecureString $FileContent -AsPlainText -Force
+$Encrypted = ConvertFrom-SecureString -SecureString $secureString -Key $EncryptionKeyData | Out-File -FilePath "./secret.encrypted"
+```
+
+### Decrypting file
+
+```
+$EncryptionKeyData = Get-Content "./encryption.key"
+$PasswordSecureString = Get-Content "./secret.encrypted" | ConvertTo-SecureString -Key $EncryptionKeyData
+$PlainTextPassword = [System.Runtime.InteropServices.Marshal]::PtrToStringBSTR([System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($PasswordSecureString))
+$PlainTextPassword | Out-File -FilePath ./plaintext.txt
+$PlainTextPassword
+```
+
+## Deleting files
+
+`Remove-Item C:\Test\*.*`
 
 ### Find Files
 Find GPP Passwords in SYSVOL
@@ -389,4 +425,5 @@ On Target
 ## References
 - Useful Cheatsheet https://gist.github.com/jivoi/c354eaaf3019352ce32522f916c03d70
 - Port scanning https://www.sans.org/blog/pen-test-poster-white-board-powershell-built-in-port-scanner/
-- 
+- Powershell vs Bash https://mathieubuisson.github.io/powershell-linux-bash/
+- Zipping files https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.archive/compress-archive?view=powershell-7.2
