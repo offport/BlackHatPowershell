@@ -1,4 +1,7 @@
 # Black Hat Powershell
+
+A field manual of Powershell tricks for hackers.
+
 ## Introduction
 
 **Powershell Locations**
