@@ -37,6 +37,10 @@ sET-ItEM ( 'V'+'aR' + 'IA' + 'blE:1q2' + 'uZx' ) ( [TYpE]( "{1}{0}"-F'F','rE' ) 
 - List processes `Get-Process`
 
 
+## Start powershell as another user
+
+`start powershell -credential ""`
+
 ## Screenshot
 
 
