@@ -11,7 +11,20 @@ A field manual of Powershell tricks for hackers.
 
 **Run Powershell prompt as a different user** without loading profile to the machine [replace DOMAIN and USER]
 
-`runas /user:DOMAIN\USER /noprofile powershell.exe`
+`runas /user:domain\user /noprofile powershell.exe`
+
+Or
+
+```
+$username = 'domain\user'
+$password = 'password'
+
+$securePassword = ConvertTo-SecureString $password -AsPlainText -Force
+$credential = New-Object System.Management.Automation.PSCredential $username, $securePassword
+Start-Process powershell.exe -Credential $credential
+```
+
+You can also execute a reverseshell as the new user
 
 ## Bypass Restrictions
 
@@ -40,21 +53,6 @@ sET-ItEM ( 'V'+'aR' + 'IA' + 'blE:1q2' + 'uZx' ) ( [TYpE]( "{1}{0}"-F'F','rE' ) 
 - List processes `Get-Process`
 
 
-## Start powershell as another user
-
-`start powershell -credential ""`
-
-Will start a powershell in a new window as the new user
-```
-$username = 'domain\user'
-$password = 'password'
-
-$securePassword = ConvertTo-SecureString $password -AsPlainText -Force
-$credential = New-Object System.Management.Automation.PSCredential $username, $securePassword
-Start-Process powershell.exe -Credential $credential
-```
-
-You can also execute a reverseshell as the new user
 
 ## Screenshot
 
