@@ -41,14 +41,17 @@ sET-ItEM ( 'V'+'aR' + 'IA' + 'blE:1q2' + 'uZx' ) ( [TYpE]( "{1}{0}"-F'F','rE' ) 
 
 `start powershell -credential ""`
 
+Will start a powershell in a new window as the new user
 ```
 $username = 'domain\user'
 $password = 'password'
 
 $securePassword = ConvertTo-SecureString $password -AsPlainText -Force
 $credential = New-Object System.Management.Automation.PSCredential $username, $securePassword
-Start-Process Notepad.exe -Credential $credential
+Start-Process powershell.exe -Credential $credential
 ```
+
+You can also execute a reverseshell as the new user
 
 ## Screenshot
 
