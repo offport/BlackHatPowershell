@@ -486,10 +486,43 @@ On Target
 
 
 
+## Clear Event Logs
 
+Required admin privilege
+
+```
+function clear-all-event-logs ($computerName="localhost")
+{
+   $logs = Get-EventLog -ComputerName $computername -List | ForEach-Object {$_.Log}
+   $logs | ForEach-Object {Clear-EventLog -ComputerName $computername -LogName $_ }
+   Get-EventLog -ComputerName $computername -list
+}
+
+clear-all-event-logs -ComputerName <hostname>
+```
+
+Expected output
+
+```
+Max(K) Retain OverflowAction        Entries Log
+------ ------ --------------        ------- ---
+15,168      0 OverwriteAsNeeded           0 Application
+15,168      0 OverwriteAsNeeded           0 DFS Replication
+512         7 OverwriteOlder              0 DxStudio
+20,480      0 OverwriteAsNeeded           0 Hardware Events
+512         7 OverwriteOlder              0 Internet Explorer
+20,480      0 OverwriteAsNeeded           0 Key Management Service
+16,384      0 OverwriteAsNeeded           0 Microsoft Office Diagnostics
+16,384      0 OverwriteAsNeeded           0 Microsoft Office Sessions
+30,016      0 OverwriteAsNeeded           1 Security
+15,168      0 OverwriteAsNeeded           2 System
+15,360      0 OverwriteAsNeeded           0 Windows PowerShell
+```
 
 ## References
 - Useful Cheatsheet https://gist.github.com/jivoi/c354eaaf3019352ce32522f916c03d70
 - Port scanning https://www.sans.org/blog/pen-test-poster-white-board-powershell-built-in-port-scanner/
 - Powershell vs Bash https://mathieubuisson.github.io/powershell-linux-bash/
 - Zipping files https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.archive/compress-archive?view=powershell-7.2
+- Clearing Event Logs https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.archive/expand-archive?view=powershell-7.2
+
