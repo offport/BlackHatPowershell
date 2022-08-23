@@ -23,8 +23,18 @@ $securePassword = ConvertTo-SecureString $password -AsPlainText -Force
 $credential = New-Object System.Management.Automation.PSCredential $username, $securePassword
 Start-Process powershell.exe -Credential $credential
 ```
-
 You can also execute a reverseshell as the new user
+
+Or starts an interactive session with a remote computer.
+
+```
+$username = 'domain\user'
+$password = 'password'
+
+$securePassword = ConvertTo-SecureString $password -AsPlainText -Force
+$credential = New-Object System.Management.Automation.PSCredential $username, $securePassword
+Enter-PSSession -ComputerName Server01 -Credential $credential
+```
 
 ## Bypass Restrictions
 
