@@ -36,6 +36,17 @@ $credential = New-Object System.Management.Automation.PSCredential $username, $s
 Enter-PSSession -ComputerName Server01 -Credential $credential
 ```
 
+Or invoke a command on a remote computer.
+
+```
+$username = 'domain\user'
+$password = 'password'
+
+$securePassword = ConvertTo-SecureString $password -AsPlainText -Force
+$credential = New-Object System.Management.Automation.PSCredential $username, $securePassword
+Invoke-Command -ScriptBlock {whoami;hostname} -ComputerName Server01 -Credential $credential
+```
+
 ## Bypass Restrictions
 
 ### Bypassing Execution Policy
