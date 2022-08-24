@@ -51,7 +51,7 @@ jobs:
           # Base blog's URL. Example: https://offport.medium.com
           base_url: https://offport.medium.com # optional, default is 
           # Base blog's post URL. Example: https://myblog/posts
-          post_url: https://offport.medium.com/posts # optional, default is 
+          post_url: https://offport.medium.com/ # optional, default is 
           # Post's status. Valid values are 'draft', 'public', or 'unlisted'
           post_status: # optional, default is draft
           # Post's license. Valid values are 'all-rights-reserved', 'cc-40-by', 'cc-40-by-sa', 'cc-40-by-nd', 'cc-40-by-nc', 'cc-40-by-nc-nd', 'cc-40-by-nc-sa', 'cc-40-zero', 'public-domain'
