@@ -43,9 +43,9 @@ jobs:
           # Medium's App ID
           app_id: offport
           # Medium's App ID
-          app_secret: ${{ secrets.MEDIUM_ACCESS_TOKEN }}
+          app_secret: ${{ MEDIUM_ACCESS_TOKEN }}
           # Medium's Access Token
-          access_token: ${{ secrets.MEDIUM_ACCESS_TOKEN }}
+          access_token: ${{ MEDIUM_ACCESS_TOKEN }}
           # Markdown post file
           markdown_file: README.md
           # Base blog's URL. Example: https://offport.medium.com
