@@ -2,6 +2,8 @@
 
 A field manual of Powershell tricks for hackers.
 
+![](powershell.png)
+
 ## Introduction
 
 **Powershell Locations**
