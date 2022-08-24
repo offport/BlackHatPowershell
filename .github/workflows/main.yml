@@ -20,7 +20,7 @@ jobs:
     steps:
       - name: Read the post
         id: post
-        run: echo "::set-output name=data::$(cat README.md)"
+        run: echo "::set-output name=data::$(cat ../README.md)"
       - name: Medium Post
         # You may pin to the exact commit or the version.
         # uses: InfraWay/post-medium-action@a44151202cf86ef60efef108bf2a707c4719a168
