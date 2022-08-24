@@ -43,7 +43,7 @@ jobs:
           # Medium's App ID
           app_id: offport
           # Medium's App ID
-          app_secret: 
+          app_secret: ${{ secrets.MEDIUM_ACCESS_TOKEN }}
           # Medium's Access Token
           access_token: ${{ secrets.MEDIUM_ACCESS_TOKEN }}
           # Markdown post file
