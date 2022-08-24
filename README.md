@@ -4,7 +4,7 @@ A field manual of Powershell tricks for hackers.
 
 ## Introduction
 
-**Powershell Locations** 
+**Powershell Locations**
 		
 		C:\windows\syswow64\windowspowershell\v1.0\powershell
 		C:\Windows\System32\WindowsPowerShell\v1.0\powershell
