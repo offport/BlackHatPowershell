@@ -2,7 +2,7 @@
 
 A field manual for hackers.
 
-![](cover.png)
+![](1cover.png)
 
 ## Introduction
 
