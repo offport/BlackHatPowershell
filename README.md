@@ -1,8 +1,8 @@
 # Black Hat Powershell
 
-A field manual of Powershell tricks for hackers.
+A field manual for hackers.
 
-![](powershell.png)
+![](cover.png)
 
 ## Introduction
 
