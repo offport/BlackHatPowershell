@@ -24,6 +24,7 @@ $securePassword = ConvertTo-SecureString $password -AsPlainText -Force
 $credential = New-Object System.Management.Automation.PSCredential $username, $securePassword
 Start-Process powershell.exe -Credential $credential
 ```
+
 You can also execute any executable like reverseshell as the new user by replacing `powershell.exe` with another executable.
 
 ### Running Powershell on Another System Remotely
@@ -72,6 +73,9 @@ Invoke-Command -ScriptBlock {whoami;hostname} -ComputerName Server01 -Credential
 
 
 ### 9 Ways to Open Powershell
+
 https://www.howtogeek.com/662611/9-ways-to-open-powershell-in-windows-10
+
+
 
 

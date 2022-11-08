@@ -8,7 +8,9 @@
 
 
 ## Windows Defender
+
 ### Disable Windows Defender
+
 In PowerShell, the following 2 commands with *Admin privilege*:
  
 	Set-MpPreference -DisableRealtimeMonitoring $true -force
@@ -22,6 +24,7 @@ Check that path from which Windows Defender allows execusion.
 `Get-MpPreference | Select-Object -ExpandProperty ExclusionPath` 
 
 ## Windows Firewall
+
 ### Creating rules
 TODO
 
@@ -182,3 +185,5 @@ Max(K) Retain OverflowAction        Entries Log
 15,168      0 OverwriteAsNeeded           2 System
 15,360      0 OverwriteAsNeeded           0 Windows PowerShell
 ```
+
+

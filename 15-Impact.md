@@ -30,3 +30,4 @@ Disable the remote desktop protocol
 Disable remote desktop through the Windows Firewall
 
 `Disable-NetFirewallRule -DisplayGroup "Remote Desktop"`
+
