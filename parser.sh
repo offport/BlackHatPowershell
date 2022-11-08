@@ -6,5 +6,5 @@ pandoc BlackHatPowershell.md -o  output.pdf \
 --number-sections \
 --top-level-division=chapter --listing -H style.tex --lua-filter colors.lua \
 
-pdftk cover.pdf output.pdf cat output Report.pdf
+pdftk cover.pdf output.pdf cat output BlackHatPowershell.pdf
 

