@@ -1,3 +1,5 @@
+cat *-*.md > BlackHatPowershell.md
+
 pandoc BlackHatPowershell.md -o  output.pdf \
 --from markdown+yaml_metadata_block+raw_html \
 --template eisvogel.latex \
