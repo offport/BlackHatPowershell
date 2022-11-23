@@ -34,6 +34,8 @@
 
 Then run the PowerShell commandlet we just created with `Test-SqlConnection -ServerName 'serverhostname' -DatabaseName 'DbName' -Credential (Get-Credential)`
 
+Source: `https://mcpmag.com/articles/2018/12/10/test-sql-connection-with-powershell.aspx`
+
 Check this
 
 https://cheats.philkeeble.com/active-directory/lateral-movement
