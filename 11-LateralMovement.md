@@ -2,14 +2,7 @@
 
 ## Port Forwarding
 
-Forwards traffic coming to 127.0.0.1:8080 (victim) to remote machine 192.168.46.16:8081 (attacker)
 
-```
-New-NetNat -Name "PortForwarding" -InternalIPInterfaceAddressPrefix "127.0.0.1/32" -InternalRoutingDomainId 1 -ExternalIPInterfaceAddress "0.0.0.0" -Protocol TCP
-
-Add-NetNatStaticMapping -NatName "PortForwarding" -Protocol TCP -ExternalIPAddress "0.0.0.0" -InternalIPAddress "192.168.46.16" -InternalPort 8081 -ExternalPort 8080
-
-```
 
 
 
