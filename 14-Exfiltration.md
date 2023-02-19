@@ -68,3 +68,35 @@ $WebClient.UploadFile($url, (Get-Location).Path + "\" + $filename)
 `./upload.ps1 https://192.168.46.1:4433/ admin:password file_to_upload`
 
 
+## HTTP Server
+
+
+```
+$port = 8080
+$dir = (Get-Location).Path
+$listener = New-Object System.Net.HttpListener
+$listener.Prefixes.Add("http://*:$port/")
+$listener.Start()
+
+Write-Host "HTTP server started on port $port"
+Write-Host "Serving files in directory $dir"
+
+while ($listener.IsListening) {
+    $context = $listener.GetContext()
+    $request = $context.Request
+    $response = $context.Response
+    $filename = $request.Url.LocalPath.TrimStart('/')
+    $filepath = Join-Path $dir $filename
+
+    if (Test-Path $filepath -PathType Leaf) {
+        $bytes = [System.IO.File]::ReadAllBytes($filepath)
+        $response.OutputStream.Write($bytes, 0, $bytes.Length)
+    } else {
+        $response.StatusCode = 404
+    }
+
+    $response.Close()
+}
+
+$listener.Stop()
+```
