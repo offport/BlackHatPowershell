@@ -23,7 +23,7 @@ $listener = New-Object System.Net.HttpListener
 $listener.Prefixes.Add("http://0.0.0.0:8080/")
 $listener.Start()
 
-Write-Host "Streaming server is running on http://0.0.0.0:8080/"
+Write-Host "Streaming server is running on http://127.0.0.1:8080/"
 
 while ($listener.IsListening) {
     $context = $listener.GetContext()
