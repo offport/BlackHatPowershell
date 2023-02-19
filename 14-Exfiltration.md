@@ -100,3 +100,62 @@ while ($listener.IsListening) {
 
 $listener.Stop()
 ```
+
+## HTTP Server with File Upload
+
+```
+$port = 8080
+$dir = (Get-Location).Path
+$listener = New-Object System.Net.HttpListener
+$listener.Prefixes.Add("http://*:$port/")
+$listener.Start()
+
+Write-Host "HTTP server started on port $port"
+Write-Host "Serving files in directory $dir"
+
+while ($listener.IsListening) {
+    $context = $listener.GetContext()
+    $request = $context.Request
+    $response = $context.Response
+    $filename = $request.Url.LocalPath.TrimStart('/')
+
+    if ($request.HttpMethod -eq "GET") {
+        # Serve a file
+        $filepath = Join-Path $dir $filename
+
+        if (Test-Path $filepath -PathType Leaf) {
+            $bytes = [System.IO.File]::ReadAllBytes($filepath)
+            $response.OutputStream.Write($bytes, 0, $bytes.Length)
+        } else {
+            $response.StatusCode = 404
+        }
+
+        $response.Close()
+    } elseif ($request.HttpMethod -eq "POST") {
+        # Receive a file upload
+        $inputStream = $request.InputStream
+        $filename = [System.IO.Path]::GetFileName($request.RawUrl)
+        $filepath = Join-Path $dir $filename
+
+        try {
+            $outputStream = [System.IO.File]::Create($filepath)
+            $inputStream.CopyTo($outputStream)
+            $response.StatusCode = 200
+        } catch {
+            $response.StatusCode = 500
+        } finally {
+            $outputStream.Close()
+            $response.Close()
+        }
+    } else {
+        $response.StatusCode = 405
+        $response.Close()
+    }
+}
+
+$listener.Stop()
+```
+
+**Command to upload**
+
+`curl -X POST -F "file=@./example.txt" http://localhost:8080/`
