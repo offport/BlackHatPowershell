@@ -6,6 +6,8 @@ As you read this book, I want to take a moment to emphasize that it contains pro
 
 If you come across any omissions or inaccuracies, please don't hesitate to contact me via the contact information provided in the book. I want to ensure that this book remains accurate and up-to-date, and I appreciate any feedback you can provide.
 
+It is important to note that the offensive security techniques, commands, and scripts provided in this guide are intended for educational and research purposes only. The author does not condone the use of these techniques for any illegal or unethical activities. The information provided in this guide is meant to help security professionals improve their offensive capabilities and ethical hacking skills. It is the reader's responsibility to ensure that any techniques or scripts provided in the book are used in a legal and ethical manner. The author of this guide cannot be held responsible for any damages resulting from the use or misuse of the information contained within. It is strongly recommended that readers use these techniques in a safe and controlled environment, with the express permission of the system owner.
+
 ## Powershell
 
 ### What is Powershell
@@ -27,6 +29,17 @@ One of the reasons PowerShell is popular for offensive security is its ability t
 PowerShell can also be used to perform a wide range of tasks, such as enumerating network resources, manipulating system configurations, and executing code remotely, making it a versatile tool for attackers.
 
 In addition, PowerShell is often used as a delivery mechanism for malware, as attackers can use it to download and execute payloads, such as Trojans and backdoors, on a compromised system.
+
+### Mitre Att&ck Framework
+
+The MITRE ATT&CK framework is a knowledge base of known tactics and techniques used by adversaries to conduct cyber attacks. 
+
+The MITRE ATT&CK framework is a comprehensive, constantly updated list of tactics and techniques that attackers use during the different phases of a cyber attack. The tactics are grouped into categories such as Initial Access, Execution, Persistence, Privilege Escalation, Defense Evasion, Credential Access, Discovery, Lateral Movement, Collection, Exfiltration, and Command and Control. Each tactic is then further broken down into specific techniques that can be used to achieve the overall goal of the tactic.
+
+### This Field Manual
+
+This field manual is a constant work-in-progress and a must must-have guide for ethical hackers, penetration testers, red teamers and security enthusiasts who appreciate the power of powershell but cannot memorize commands or spend a long time looking for scripts online. The book is specifically designed to provide a well-structured comprehensive set of offensive security commands, techniques, and scripts, organized by the MITRE ATT&CK framework.
+
 
 ## Running Powershell
 ### Where to Find Powershell
