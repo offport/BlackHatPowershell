@@ -50,6 +50,29 @@ while ($listener.IsListening) {
 $listener.Stop()
 
 ```
+
+```
+# Import the Windows PowerShell Web Server module
+Import-Module WebAdministration
+
+# Define the path to your screen capture files
+$screenCapturePath = "C:\Path\To\Screen\Capture"
+
+# Start the screen capture
+$job = Start-Process powershell.exe "-command & { Get-ChildItem -Path C:\Path\To\Screen\Capture -Filter '*.jpg' -Recurse | Remove-Item }" -PassThru
+$job2 = Start-ScreenCapture -Path $screenCapturePath
+
+# Set up the web server to serve the screen capture
+New-WebVirtualDirectory -Site 'Default Web Site' -Name 'ScreenCapture' -PhysicalPath $screenCapturePath
+Set-WebConfigurationProperty -Filter "/system.webServer/directoryBrowse" -Name "enabled" -Value "True"
+Set-WebConfigurationProperty -Filter "/system.webServer/directoryBrowse" -Name "showFlags" -Value "Date, Time, Size, Extension"
+
+# Set the web server to listen on port 8080
+Set-ItemProperty -Path "IIS:\Sites\Default Web Site" -Name bindings -Value @{protocol="http";bindingInformation="*:8080:"}
+
+```
+
+
 ## Serving Camera Feed on HTTP
 
 This script does the following:
