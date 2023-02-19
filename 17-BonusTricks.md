@@ -20,10 +20,10 @@ Add-Type -AssemblyName System.Windows.Forms
 Add-Type -AssemblyName System.Drawing
 
 $listener = New-Object System.Net.HttpListener
-$listener.Prefixes.Add("http://localhost:8080/")
+$listener.Prefixes.Add("http://0.0.0.0:8080/")
 $listener.Start()
 
-Write-Host "Streaming server is running on http://localhost:8080/"
+Write-Host "Streaming server is running on http://0.0.0.0:8080/"
 
 while ($listener.IsListening) {
     $context = $listener.GetContext()
