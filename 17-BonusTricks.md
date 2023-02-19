@@ -51,6 +51,8 @@ $listener.Stop()
 
 ```
 
+`Install-Module -Name WebAdministration`
+
 ```
 # Import the Windows PowerShell Web Server module
 Import-Module WebAdministration
