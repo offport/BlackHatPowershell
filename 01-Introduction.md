@@ -38,6 +38,8 @@ In addition, PowerShell is often used as a delivery mechanism for malware, as at
 	
 ### Running Powershell as a Different User
 
+This section shows you how to run PowerShell as a different user with limited profile loading. This can be useful in situations where you need to run PowerShell with elevated privileges or to perform tasks that require different permissions than your current user account.
+
 **Run Powershell prompt as a different user** without loading profile to the machine [replace DOMAIN and USER]
 
 `runas /user:domain\user /noprofile powershell.exe`
