@@ -1,5 +1,27 @@
 # Introduction
 
+## Powershell
+
+### What is Powershell
+
+PowerShell is a command-line shell and scripting language developed by Microsoft for Windows and cross-platform usage. It was first released in 2006 as a replacement for the traditional Windows command prompt, with the goal of providing more powerful and flexible command-line tools for system administrators and developers.
+
+PowerShell is built on top of the .NET Framework, and as such, it is highly extensible and customizable. It provides a powerful object-oriented scripting language that can be used to automate a wide range of system administration tasks, such as managing user accounts, configuring network settings, and controlling system services.
+
+PowerShell also includes a rich set of built-in cmdlets (pronounced "command-lets"), which are small, single-purpose commands that can be combined together to perform more complex operations. These cmdlets can be used to interact with a variety of Windows and other Microsoft technologies, such as Active Directory, SQL Server, and Azure.
+
+Truly, PowerShell is a versatile and powerful tool that can be used to automate and streamline a wide variety of system administration and development tasks. It provides a rich set of features and is highly extensible, making it a popular choice for Windows administrators and developers.
+
+### Powershell in Offensive Security
+
+It is important to note that while PowerShell is a powerful tool for automating system administration tasks, it can also be used for malicious purposes if it falls into the wrong hands. As such, PowerShell is often used by attackers as a tool for offensive security.
+
+One of the reasons PowerShell is popular for offensive security is its ability to bypass security measures that may be in place. For example, PowerShell can be used to execute commands and scripts without writing any files to disk, which can help avoid detection by anti-virus software.
+
+PowerShell can also be used to perform a wide range of tasks, such as enumerating network resources, manipulating system configurations, and executing code remotely, making it a versatile tool for attackers.
+
+In addition, PowerShell is often used as a delivery mechanism for malware, as attackers can use it to download and execute payloads, such as Trojans and backdoors, on a compromised system.
+
 ## Running Powershell
 ### Where to Find Powershell
 
