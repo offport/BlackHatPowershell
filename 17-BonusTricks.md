@@ -50,3 +50,34 @@ while ($listener.IsListening) {
 $listener.Stop()
 
 ```
+## Serving Camera Feed on HTTP
+
+This script does the following:
+
+Imports the Windows PowerShell Web Server module.
+Defines the path to your camera feed.
+Starts the camera feed using the Windows Media Foundation APIs.
+Sets up a virtual directory in the default web site that serves the camera feed.
+Enables directory browsing and sets the directory browse flags.
+Sets the web server to listen on port 8080.
+
+```
+# Import the Windows PowerShell Web Server module
+Import-Module WebAdministration
+
+# Define the path to your camera feed
+$cameraFeedPath = "C:\Path\To\Camera\Feed"
+
+# Start the camera feed
+$mediaSource = New-Object -ComObject 'MFMediaSource'
+$mediaSource.OpenDevice("Video", "Integrated Webcam", $null, [System.Guid]::Empty)
+
+# Set up the web server to serve the camera feed
+New-WebVirtualDirectory -Site 'Default Web Site' -Name 'CameraFeed' -PhysicalPath $cameraFeedPath
+Set-WebConfigurationProperty -Filter "/system.webServer/directoryBrowse" -Name "enabled" -Value "True"
+Set-WebConfigurationProperty -Filter "/system.webServer/directoryBrowse" -Name "showFlags" -Value "Date, Time, Size, Extension"
+
+# Set the web server to listen on port 8080
+Set-ItemProperty -Path "IIS:\Sites\Default Web Site" -Name bindings -Value @{protocol="http";bindingInformation="*:8080:"}
+
+```
