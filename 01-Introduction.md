@@ -1,5 +1,11 @@
 # Introduction
 
+### Disclaimer
+
+As you read this book, I want to take a moment to emphasize that it contains programming scripts and tools authored by other creators. I have made every effort to credit all sources appropriately, but it is possible that some may have been missed inadvertently. I want to assure you that I have done my best to be diligent in my research and credit all authors and developers whose work is included in this book.
+
+If you come across any omissions or inaccuracies, please don't hesitate to contact me via the contact information provided in the book. I want to ensure that this book remains accurate and up-to-date, and I appreciate any feedback you can provide.
+
 ## Powershell
 
 ### What is Powershell
